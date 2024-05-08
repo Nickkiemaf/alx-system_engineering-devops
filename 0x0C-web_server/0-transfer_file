@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-check for command line parameters
+# check for command line parameters
 
 if [ $# -lt 4 ]
 then
