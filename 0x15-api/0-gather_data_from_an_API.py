@@ -1,19 +1,28 @@
 #!/usr/bin/python3
-#python script that returns employee todo list
-#uses REST API
+"""
+Python script that returns an employee's todo list
+using a REST API.
+"""
 
+import json
 import requests
 import sys
-import _json
+
 
 def get_employee_todo_list(employee_id):
-    base_url = "https://jsonplaceholder.typicode.com"  #API URL
-    user_url = f"{base_url}/users/{employee_id}" 
+    """
+    Fetches and prints the todo list progress of a given employee.
+    
+    Args:
+        employee_id (int): The ID of the employee.
+    """
+    base_url = "https://jsonplaceholder.typicode.com"  # API URL
+    user_url = f"{base_url}/users/{employee_id}"
     todos_url = f"{base_url}/todos?userId={employee_id}"
 
     # Fetches user data
     user_response = requests.get(user_url)
-    if user_response.status_code != 200: #returns error
+    if user_response.status_code != 200:  # Returns error if unable to fetch user data
         print("Error: Unable to fetch user data")
         return
 
@@ -22,7 +31,7 @@ def get_employee_todo_list(employee_id):
 
     # Fetch todos data
     todos_response = requests.get(todos_url)
-    if todos_response.status_code != 200:
+    if todos_response.status_code != 200:  # Returns error if unable to fetch todos data
         print("Error: Unable to fetch todos data")
         return
 
@@ -38,6 +47,7 @@ def get_employee_todo_list(employee_id):
     for task in done_tasks:
         print(f"\t {task['title']}")
 
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python3 0-gather_data_from_an_API.py <employee_id>")
@@ -50,4 +60,3 @@ if __name__ == "__main__":
         sys.exit(1)
 
     get_employee_todo_list(employee_id)
-
