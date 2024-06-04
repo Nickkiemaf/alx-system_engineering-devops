@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 Python script that exports an employee's todo list data to a CSV file
 using a REST API.
